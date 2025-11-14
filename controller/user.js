@@ -1,7 +1,6 @@
-import userSchemaObj from "../helper/validator/user";
-import userServicesObj from "../services/user";
+import userSchema from "../helper/validator/user.js";
 import Joi from "joi";
-
+import userServicesObj from '../services/user.js'
 
 const options = {
     abortEarly: false,
@@ -12,7 +11,7 @@ const options = {
 class userController {
     async getUser(req, res) {
         try {
-            let { error } = userSchemaObj.validate(req.body, options)
+            let { error } = userSchema.validate(req.query, options)
             if (error) {
                 return res.status(400).json({ message: error?.details[0]?.message, statusCode: 400, success: false })
             }
@@ -22,3 +21,5 @@ class userController {
         }
     }
 }
+const UserControllerObj = new userController()
+export default UserControllerObj

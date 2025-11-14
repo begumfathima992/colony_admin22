@@ -3,19 +3,22 @@ import dotenv from 'dotenv'
 import sequelize from './config/dbconfig.js'
 import reservationModel from './models/reservation.js'
 import UserModel from './models/user.js'
+import UserRoutes from './routes.js/user.js'
+import reservationRoutes from './routes.js/reservation.js'
 
 dotenv.config()
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-
-app.use("/", (req, res) => {
-    res.json({ message: "Success", statusCode: 200 })
+app.use("/hello", (req, res) => {
+    return res.json({ message: "Success", statusCode: 200 })
 })
-// app.use("/user")
-const PORT = process.env.PORT || 2001;
 
+app.use("/user", UserRoutes)
+app.use("/reservation", reservationRoutes)
+
+const PORT = process.env.PORT || 2001;
 // Start server after DB connection
 (async () => {
     try {

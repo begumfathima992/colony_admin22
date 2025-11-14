@@ -1,21 +1,26 @@
-import sequelize from "../config/dbconfig"
+import sequelize from "../config/dbconfig.js"
 
 class UserServices {
     async getUser(req, res) {
         try {
-
             let { page = 1, limit = 10, name } = req.query
             page = parseInt(page)
             limit = parseInt(limit)
             let offset = (page - 1) * limit
 
-            let str = ` SELECT * FROM users  
-            
+            let str = ` SELECT users.id,
+                              users.name,
+                              users.phone,
+                              users.anniversary_date,
+                              users.birthday_date,
+                              users.membership_number FROM users            
             `
             if (name) {
-
-                str += `LIMIT :limit OFFSET :offset`
+                str += `WHERE users.name ILIKE :name`;
             }
+            str += `ORDER BY id DESC
+             LIMIT :limit OFFSET :offset`
+            // console.log(str, "str111111111", req.query, 'req')
 
             let get = await sequelize.query(str, {
                 replacements: {
