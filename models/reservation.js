@@ -1,9 +1,9 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../config/dbconfig.js';
 
-class Reservation extends Model { }
+class ReservationModel extends Model { }
 
-Reservation.init(
+ReservationModel.init(
   {
     id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true, unique: true },
 
@@ -117,4 +117,4 @@ Reservation.init(
   }
 );
 
-export default Reservation;
+export default ReservationModel;

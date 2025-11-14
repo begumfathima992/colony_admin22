@@ -1,9 +1,9 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../config/dbconfig.js';
 
-class User extends Model {}
+class UserModel extends Model {}
 
-User.init(
+UserModel.init(
   {
     name: DataTypes.STRING,
     phone: DataTypes.STRING,
@@ -21,4 +21,4 @@ User.init(
   }
 );
 
-export default User;
+export default UserModel;
