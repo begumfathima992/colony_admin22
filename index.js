@@ -5,9 +5,16 @@ import reservationModel from './models/reservation.js'
 import UserModel from './models/user.js'
 import UserRoutes from './routes.js/user.js'
 import reservationRoutes from './routes.js/reservation.js'
+import cors from 'cors'
 
 dotenv.config()
 const app = express()
+app.use(cors({
+    origin: "*", // or set specific origin: ["http://localhost:3000"]
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}))
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 

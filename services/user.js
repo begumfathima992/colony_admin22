@@ -1,7 +1,7 @@
 import sequelize from "../config/dbconfig.js"
 
 class UserServices {
-    async getUser(req, res) {
+    async       getUser(req, res) {
         try {
             let { page = 1, limit = 10, name } = req.query
             page = parseInt(page)
@@ -16,9 +16,9 @@ class UserServices {
                               users.membership_number FROM users            
             `
             if (name) {
-                str += `WHERE users.name ILIKE :name`;
+                str += `WHERE users.name ILIKE :name `;
             }
-            str += `ORDER BY id DESC
+            str += ` ORDER BY id DESC
              LIMIT :limit OFFSET :offset`
             // console.log(str, "str111111111", req.query, 'req')
 

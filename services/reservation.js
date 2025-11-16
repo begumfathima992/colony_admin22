@@ -29,9 +29,14 @@ class reservationService {
             // reservations.customer_id,
             // reservations.clientSecret,
             //            reservations.ephemeralKey 
-            let str = `SELECT *
-            FROM reservations`
-
+            let str = `
+    SELECT reservations.*, users.name, users.phone
+    FROM reservations
+    LEFT JOIN users 
+        ON reservations.user_id = users.id
+    WHERE (:name IS NULL OR users.name LIKE :name)
+    LIMIT :limit OFFSET :offset;
+`;
             let get = await sequelize.query(str,
                 {
                     replacements: {
