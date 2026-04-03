@@ -35,6 +35,7 @@ class reservationService {
     LEFT JOIN users 
         ON reservations.user_id = users.id
     WHERE (:name IS NULL OR users.name LIKE :name)
+    ORDER BY reservations.id DESC
     LIMIT :limit OFFSET :offset;
 `;
             let get = await sequelize.query(str,
@@ -63,6 +64,10 @@ class reservationService {
             return res.status(500).json({ message: error?.message, statusCode: 500, success: false })
         }
     }
+
+
+    // Add this method to your reservationService class
+
 }
 
 const reservationServicesObj = new reservationService
